@@ -1,0 +1,64 @@
+<div>
+    <h2>
+        <span jhiTranslate="blogApp.wishList.home.title">Wish Lists</span>
+        <button class="btn btn-primary float-right jh-create-entity create-wish-list" [routerLink]="['/', { outlets: { popup: ['wish-list-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="blogApp.wishList.home.createLabel">
+            Create new Wish List
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="wishLists">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="blogApp.wishList.name">Name</span></th>
+            <th><span jhiTranslate="blogApp.wishList.creationDate">Creation Date</span></th>
+            <th><span jhiTranslate="blogApp.wishList.hidden">Hidden</span></th>
+            <th><span jhiTranslate="blogApp.wishList.user">User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let wishList of wishLists ;trackBy: trackId">
+                <td><a [routerLink]="['../wish-list', wishList.id ]">{{wishList.id}}</a></td>
+                <td>{{wishList.name}}</td>
+                <td>{{wishList.creationDate | date:'medium'}}</td>
+                <td>{{wishList.hidden}}</td>
+                <td>
+                    {{wishList.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../wish-list', wishList.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'wish-list/'+ wishList.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'wish-list/'+ wishList.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
