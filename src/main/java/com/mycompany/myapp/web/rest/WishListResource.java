@@ -85,7 +85,7 @@ public class WishListResource {
     @Timed
     public List<WishList> getAllWishLists() {
         log.debug("REST request to get all WishLists");
-        return wishListRepository.findAll();
+        return wishListRepository.findByUserIsCurrentUser();
         }
 
     /**
